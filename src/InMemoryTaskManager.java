@@ -1,31 +1,37 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
-public class TrackerManager {
+public class InMemoryTaskManager implements TaskManager {
+
 
     private int id = 0;                                        //Начальный id
 
-    HashMap<Integer, Task> tasks = new HashMap<>();            //Мапа для задач
-    HashMap<Integer, Epic> epics = new HashMap<>();            //Мапа для эпиков
-    HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
+    private final HashMap<Integer, Task> tasks = new HashMap<>();            //Мапа для задач
+    private final HashMap<Integer, Epic> epics = new HashMap<>();            //Мапа для эпиков
+    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
 
+    private final HistoryManager history = Managers.getDefaultHistory();   // Получаем менеджер истории
+
+    @Override
     public int getId() {                                       //Получаем новый уникальный id
         id++;
         return id;
     }
 
+    @Override
     public int createTask(Task task) {                         //Добавляем задачу
         tasks.put(getId(), task);
         task.setId(id);
         return id;
     }
 
+    @Override
     public int createEpic(Epic epic) {                         //Добавляем эпик
         epics.put(getId(), epic);
         epic.setId(id);
         return id;
     }
 
+    @Override
     public int createSubtask(Subtask subtask) {                 //Добавляем подзадачу
         subtasks.put(getId(), subtask);
         subtask.setId(id);
@@ -37,28 +43,34 @@ public class TrackerManager {
         return id;
     }
 
-    public Object getAllTasks() {                               // Получаем все задачи
+    @Override
+    public HashMap<Integer, Task> getAllTasks() {                               // Получаем все задачи
         return tasks;
     }
 
-    public Object getAllEpics() {                               //Получаем все эпики
+    @Override
+    public HashMap<Integer, Epic> getAllEpics() {                               //Получаем все эпики
         return epics;
     }
 
-    public Object getAllSubtasks() {                             //Получаем все подзадачи
+    @Override
+    public HashMap<Integer, Subtask> getAllSubtasks() {                             //Получаем все подзадачи
         return subtasks;
     }
 
-    void removeAllTasks() {                                      //Удаляем все задачи
+    @Override
+    public void removeAllTasks() {                                      //Удаляем все задачи
         tasks.clear();
     }
 
-    void removeAllEpics() {                                      //Удаляем все эпики
+    @Override
+    public void removeAllEpics() {                                      //Удаляем все эпики
         epics.clear();
         subtasks.clear();                                        //Также удаляем все подзадачи
     }
 
-    void removeAllSubtasks() {                                   //Удаляем все подзадачи
+    @Override
+    public void removeAllSubtasks() {                                   //Удаляем все подзадачи
         subtasks.clear();
 
         for (int key : epics.keySet()) {                         //Вызываем метод удаления id подзадач для всех эпиков
@@ -69,30 +81,39 @@ public class TrackerManager {
         }
     }
 
+    @Override
     public Task getTask(int id) {                                 //Получаем задачу по id
+        history.add(tasks.get(id));                               //Добавляем вызов задачи в историю
         return tasks.get(id);
     }
 
+    @Override
     public Epic getEpic(int id) {                                 //Получаем эпик по id
+        history.add(epics.get(id));                               //Добавляем вызов эпика в историю
         return epics.get(id);
     }
 
+    @Override
     public Subtask getSubtask(int id) {                           //Получаем подзадачу по id
+        history.add(subtasks.get(id));                            //Добавляем вызов эпика в историю
         return subtasks.get(id);
     }
 
-    void removeTaskById(int id) {                                 //Удаляем задачу по id
+    @Override
+    public void removeTaskById(int id) {                           //Удаляем задачу по id
         tasks.remove(id);
     }
 
-    void removeEpicById(int id) {                                 //Удаляем эпик по id
+    @Override
+    public void removeEpicById(int id) {                          //Удаляем эпик по id
         for (int subId : epics.get(id).getSubtasksIds()) {        //Удаляем все подзадачи эпика
             subtasks.remove(subId);
         }
         epics.remove(id);                                         //Удаляем сам эпик
     }
 
-    void removeSubtaskById(int id) {                              //Удаляем подзадачу по id
+    @Override
+    public void removeSubtaskById(int id) {                       //Удаляем подзадачу по id
         int epicsId = subtasks.get(id).getEpicId();
         subtasks.remove(id);
         epics.get(epicsId).removeSubtask(id);                     //Удаляем подзадачу из эпика
@@ -100,6 +121,7 @@ public class TrackerManager {
         changeEpicsStatus(epicsId);                               //Вызываем метод для обновления статуса эпика
     }
 
+    @Override
     public ArrayList<Object> getEpicsSubtasks(int id) {           // Получение подзадач эпика
         if (epics.containsKey(id)) {                              //Проверка переданного id на соотвествие id эпика
             Epic epic = epics.get(id);
@@ -112,6 +134,7 @@ public class TrackerManager {
         return null;                                              //Если id не соотвествует возвращаем null
     }
 
+    @Override
     public void updateTask(Task newTask) {                        //Обновить задачу
         int id = newTask.getId();
         Task savedTask = tasks.get(id);                           //Проверяем наличие такой задачи
@@ -121,16 +144,18 @@ public class TrackerManager {
         tasks.put(id, newTask);                                   //Перезаписываем
     }
 
+    @Override
     public void updateEpic(Epic newEpic) {                        //Обновить эпик
         int id = newEpic.getId();
         Task savedTask = epics.get(id);                           //Проверяем наличие такого эпика
         if (savedTask == null) {
             return;
         }
-        tasks.put(id, newEpic);                                  //Перезаписываем
+        epics.put(id, newEpic);                                  //Перезаписываем
 
     }
 
+    @Override
     public void updateSubtask(Subtask newSubtask) {              //Обновить подзадачу
         int id = newSubtask.getId();
         Task savedSubtask = subtasks.get(id);                    //Проверяем наличие такой подзадачи
@@ -143,30 +168,28 @@ public class TrackerManager {
 
     }
 
+    @Override
     public void changeEpicsStatus(int id) {
         if (epics.get(id).getSubtasksIds().isEmpty()) {                  //Если подзадач нет статус NEW
-            epics.get(id).setStatus("NEW");
+            epics.get(id).setStatus(Status.NEW);
             return;
         }
         ArrayList<Integer> subtaskIds = epics.get(id).getSubtasksIds();
-        String curStatus = subtasks.get(subtaskIds.get(0)).status;      //Присваиваем переменной статус первой
-        // подзадачи в эпике
+        Status curStatus = (subtasks.get(subtaskIds.get(0)).status);      //Присваиваем переменной статус первой
+                                                                          // подзадачи в эпике
 
         for (int subId : epics.get(id).getSubtasksIds()) {
 
             if (subtasks.get(subId).status.equals(curStatus)) {           //Сравниваем статус всех подзадач с первым,
                 epics.get(id).setStatus(curStatus);                       // если статусы одинаковы, присваиваем статус
-                                                                          // эпику
+                // эпику
             } else
-                epics.get(id).setStatus("IN_PROGRESS");                  //Во всех остальных случаях статус IN_PROGRESS
+                epics.get(id).setStatus(Status.IN_PROGRESS);             //Во всех остальных случаях статус IN_PROGRESS
         }
     }
+
+    @Override
+   public List<Task> getHistory() {                                             //Просмотр истории
+     return history.getHistory();
+    }
 }
-
-
-
-
-
-
-
-

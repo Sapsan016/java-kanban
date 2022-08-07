@@ -2,13 +2,9 @@ public class Task {
     protected String name;
     protected String description;
     protected int id;
-    protected String status;
+    protected Status status;
 
-    public Task() {
-
-    }
-
-    public Task(String name, String description, String status, int id) {
+    public Task(String name, String description, Status status, int id) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -30,5 +26,11 @@ public class Task {
                 ", \nid='" + id + '\'' +
                 ", \nстатус=" + status +
                 "}";
+    }
+
+
+    public void setStatus(Status newStatus) {
+        status = newStatus;
+
     }
 }

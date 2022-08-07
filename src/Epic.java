@@ -2,12 +2,11 @@ import java.util.ArrayList;
 
 class Epic extends Task{   //Наследует от Task
 
-private ArrayList<Integer> subtasksIds = new ArrayList<>(); //Список id подзадач
+private final ArrayList<Integer> subtasksIds; //Список id подзадач
 
-    public Epic(String name, String description, String status) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
+    public Epic(String name, String description, Status status, int id) {
+        super(name, description, status, id);
+        subtasksIds = new ArrayList<>();
     }
 
     public void setSubtasksIds(int id){                     //Добавляем id подзадач в поле эпика
@@ -17,7 +16,7 @@ private ArrayList<Integer> subtasksIds = new ArrayList<>(); //Список id п
        return subtasksIds;
     }
 
-    public void setStatus(String newStatus){                //Изменяем статус в зависимости от статуса подзадач
+    public void setStatus(Status newStatus){                //Изменяем статус в зависимости от статуса подзадач
         status = newStatus;
 
     }
@@ -37,6 +36,5 @@ private ArrayList<Integer> subtasksIds = new ArrayList<>(); //Список id п
                 ", \nid_позадач=" + subtasksIds +
                 '}';
     }
-
 }
 
