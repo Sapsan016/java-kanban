@@ -21,11 +21,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Задача{" + name +
-                ", \nописание='" + description + '\'' +
-                ", \nid='" + id + '\'' +
-                ", \nстатус=" + status +
-                "}";
+        return id + "," + Type.TASK + "," + name + "," + status + "," + description;
     }
 
 

@@ -29,12 +29,9 @@ private final ArrayList<Integer> subtasksIds; //Список id подзадач
 
     @Override
     public String toString() {
-        return "Эпик{" + name +
-                ", \nописание='" + description + '\'' +
-                ", \nid='" + id + '\'' +
-                ", \nстатус=" + status +
-                ", \nid_позадач=" + subtasksIds +
-                '}';
+
+        return id + "," + Type.EPIC + "," + name + "," + status + "," + description + ","
+                + subtasksIds.toString().replace("[", "").replace("]", "").replaceAll("\\s+","");
     }
 }
 

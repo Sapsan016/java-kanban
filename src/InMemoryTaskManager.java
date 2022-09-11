@@ -3,13 +3,13 @@ import java.util.*;
 public class InMemoryTaskManager implements TaskManager {
 
 
-    private int id = 0;                                        //Начальный id
+    protected int id = 0;                                        //Начальный id
 
-    private final HashMap<Integer, Task> tasks = new HashMap<>();            //Мапа для задач
-    private final HashMap<Integer, Epic> epics = new HashMap<>();            //Мапа для эпиков
-    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
+    protected final HashMap<Integer, Task> tasks = new HashMap<>();            //Мапа для задач
+    protected final HashMap<Integer, Epic> epics = new HashMap<>();            //Мапа для эпиков
+    protected final HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
 
-    private final HistoryManager history = Managers.getDefaultHistory();   // Получаем менеджер истории
+    protected final HistoryManager history = Managers.getDefaultHistory();   // Получаем менеджер истории
 
     @Override
     public int getId() {                                       //Получаем новый уникальный id

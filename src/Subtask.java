@@ -13,11 +13,6 @@ public class Subtask extends Task{
 
     @Override
     public String toString() {
-        return "Подзадача{" + name +
-                ", \nописание='" + description + '\'' +
-                ", \nid='" + id + '\'' +
-                ", \nстатус=" + status +
-                ", \nid эпика=" + epicId +
-                '}';
+        return id + "," + Type.SUBTASK + "," + name + "," + status + "," + description + "," + epicId;
     }
 }
