@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface TaskManager {     //Интерфейс менеджера задач
@@ -11,11 +12,11 @@ public interface TaskManager {     //Интерфейс менеджера за�
 
     int createSubtask(Subtask subtask);
 
-    Object getAllTasks();
+    HashMap<Integer, Task> getAllTasks();
 
-    Object getAllEpics();
+    HashMap<Integer, Epic> getAllEpics();
 
-    Object getAllSubtasks();
+    HashMap<Integer, Subtask> getAllSubtasks();
 
     void removeAllTasks();
 

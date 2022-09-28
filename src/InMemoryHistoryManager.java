@@ -2,9 +2,7 @@ import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
     private final CustomLinkedList<Task> customHistoryList = new CustomLinkedList<>(); //Список просмотренных задач
-
     private final Map<Integer, Node<Task>> historyMap = new HashMap<>();
-
 
     @Override
 
@@ -32,11 +30,8 @@ public class InMemoryHistoryManager implements HistoryManager {
 
             customHistoryList.removeNode(historyMap.get(id));
         }
-
     }
-
 }
-
 
 class CustomLinkedList<T> {                          //Создаем двусвязный список
     public Node<Task> head;
@@ -91,4 +86,3 @@ class CustomLinkedList<T> {                          //Создаем двусв
         size--;
     }
 }
-

@@ -1,10 +1,17 @@
+import java.time.LocalDateTime;
+
 public class Subtask extends Task{
 
-    private final int epicId;                                        // id эпика к которому относится подзадача
+    private int epicId;                                        // id эпика к которому относится подзадача
 
-    public Subtask(String name, String description, Status status, int id, int epicId) {
-        super(name, description, status, id);
+    public Subtask(String name, String description, Status status, int id, int epicId, int duration, LocalDateTime startTime) {
+        super(name, description,status, id, duration, startTime);
+
         this.epicId = epicId;
+    }
+    @Override
+    public Type getType(){
+        return Type.SUBTASK;
     }
 
     public int getEpicId(){                                     //Возвращаем id эпика
@@ -13,6 +20,7 @@ public class Subtask extends Task{
 
     @Override
     public String toString() {
-        return id + "," + Type.SUBTASK + "," + name + "," + status + "," + description + "," + epicId;
+        return id + "," + Type.SUBTASK + "," + name + "," + status + "," + description + "," + duration + "," +
+                startTime.format(formatter) + "," + epicId;
     }
 }

@@ -70,16 +70,12 @@ public class Task {
                 Objects.equals(name, otherTask.name) &&
                 Objects.equals(description, otherTask.description) &&
                 Objects.equals(duration, otherTask.duration);
-
     }
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id ,Type.TASK,name, status ,description ,duration ,startTime.format(formatter));
     }
-
-
 
     public void setStatus(Status newStatus) {
         status = newStatus;
