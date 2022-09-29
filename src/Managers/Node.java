@@ -1,3 +1,5 @@
+package Managers;
+
 class Node <Task> {
 
     public Task data;

@@ -1,3 +1,5 @@
+package Tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -6,11 +8,11 @@ public class Task {
     protected String name;
     protected String description;
 
-    protected int id;
+    public int id;
 
-    protected Status status;
+    public Status status;
     protected int duration;
-    protected LocalDateTime startTime;
+    public LocalDateTime startTime;
 
     protected LocalDateTime endTime;
 
@@ -74,7 +76,7 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id ,Type.TASK,name, status ,description ,duration ,startTime.format(formatter));
+        return Objects.hash(id , Type.TASK,name, status ,description ,duration ,startTime.format(formatter));
     }
 
     public void setStatus(Status newStatus) {

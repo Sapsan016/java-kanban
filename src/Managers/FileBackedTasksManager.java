@@ -1,3 +1,11 @@
+package Managers;
+
+import Tasks.Epic;
+import Tasks.Status;
+import Tasks.Task;
+import Tasks.Type;
+import Tasks.Subtask;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -139,7 +147,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return str;
     }
 
-    static List<Integer> historyFromString(String value) {         //Восстанавливаем список просмотренных задач
+    public static List<Integer> historyFromString(String value) {         //Восстанавливаем список просмотренных задач
         List<Integer> historyList = new ArrayList<>();
         String[] lines = value.split("\n");                   //Делим строку по линиям
         for (int i = 1; i < lines.length; i++) {                    //начиная со второй
@@ -156,7 +164,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return historyList;
     }
 
-    static FileBackedTasksManager loadFromFile(File file) {
+    public static FileBackedTasksManager loadFromFile(File file) {
 
         return new FileBackedTasksManager(file.toString());
     }

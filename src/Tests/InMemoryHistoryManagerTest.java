@@ -1,3 +1,6 @@
+package Tests;
+import Tasks.*;
+import Managers.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -8,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class InMemoryHistoryManagerTest {
 
     protected static HistoryManager testHistoryManager = Managers.getDefaultHistory();
-    protected  Task testTask1 = new Task("Test NewTask1", "Test NewTask1 description", Status.NEW, 1,
+    protected Task testTask1 = new Task("Test NewTask1", "Test NewTask1 description", Status.NEW, 1,
             30, LocalDateTime.now());
 
-    protected  Task testTask2 = new Task("Test NewTask2", "Test NewTask2 description", Status.NEW, 2,
+    protected Task testTask2 = new Task("Test NewTask2", "Test NewTask2 description", Status.NEW, 2,
             100, LocalDateTime.now().plusHours(1));
-    protected  Epic testEpic1 = new Epic("Test NewEpic1", "Test NewEpic1 description", Status.NEW, 3,
+    protected Epic testEpic1 = new Epic("Test NewEpic1", "Test NewEpic1 description", Status.NEW, 3,
             0,LocalDateTime.now().minusMinutes(30));
     @Test
     void shouldAddToHistoryWithoutDuplicates() {  //Должен добавлять задачу в историю без повторов

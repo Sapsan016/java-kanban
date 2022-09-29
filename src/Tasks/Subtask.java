@@ -1,6 +1,12 @@
+package Tasks;
+
+import Tasks.Status;
+import Tasks.Task;
+import Tasks.Type;
+
 import java.time.LocalDateTime;
 
-public class Subtask extends Task{
+public class Subtask extends Task {
 
     private int epicId;                                        // id эпика к которому относится подзадача
 

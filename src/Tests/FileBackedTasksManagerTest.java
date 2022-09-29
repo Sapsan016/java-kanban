@@ -1,3 +1,8 @@
+package Tests;
+import Managers.*;
+import Tasks.*;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -96,12 +101,10 @@ class FileBackedTasksManagerTest extends InMemoryTaskManagerTest {
                 (newTestManager.readFromFile(path.toString()))); //Восстанавливаем историю просмотров
 
 
-        assertEquals(savedHistoryList, newTestManager.getHistory(), "History Lists don`t match"); //Проверяем восстановление истории
-        assertEquals(testTask1, newTestManager.tasks.get(testTask1.getId()), "Task not found.");  //Проверяем восстановление задач
-        assertEquals(testEpic1, newTestManager.epics.get(testEpic1.getId()), "Task not found.");
-        assertEquals(testSubtask1, newTestManager.subtasks.get(testSubtask1.getId()), "Task not found.");
-
-
+        Assertions.assertEquals(savedHistoryList, newTestManager.getHistory(), "History Lists don`t match"); //Проверяем восстановление истории
+        assertEquals(testTask1, newTestManager.tasks.get(testTask1.getId()), "Tasks.Task not found.");  //Проверяем восстановление задач
+        assertEquals(testEpic1, newTestManager.epics.get(testEpic1.getId()), "Tasks.Task not found.");
+        assertEquals(testSubtask1, newTestManager.subtasks.get(testSubtask1.getId()), "Tasks.Task not found.");
     }
 
     @Test
@@ -129,7 +132,7 @@ class FileBackedTasksManagerTest extends InMemoryTaskManagerTest {
         testManager.removeTaskById(testTask1.getId());         //Удаляем задачу
         assertNull(testManager.getTask(testTask1.getId()));    //Проверяем, что задача удалена
         testManager.fromString(savedTaskString);               //Восстанавливаем задачу из строки
-        assertEquals(testTask1, testManager.tasks.get(testTask1.id), "Task not found."); //Проверяем соответствие
+        assertEquals(testTask1, testManager.tasks.get(testTask1.id), "Tasks.Task not found."); //Проверяем соответствие
     }
 
     @Test
@@ -143,8 +146,7 @@ class FileBackedTasksManagerTest extends InMemoryTaskManagerTest {
         assertNull(testManager.getSubtask(testSubtask1.getId()));
         testManager.fromString(savedTaskEpic);                          //Восстанавливаем эпик и подзадачу из строки
         testManager.fromString(savedSubtask);
-        assertEquals(testEpic1, testManager.epics.get(testEpic1.id), "Task not found."); //Проверяем соответствие
-        assertEquals(testSubtask1, testManager.subtasks.get(testSubtask1.getId()), "Task not found.");
+        assertEquals(testEpic1, testManager.epics.get(testEpic1.id), "Tasks.Task not found."); //Проверяем соответствие
+        assertEquals(testSubtask1, testManager.subtasks.get(testSubtask1.getId()), "Tasks.Task not found.");
     }
-
 }

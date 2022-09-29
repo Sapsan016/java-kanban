@@ -1,3 +1,7 @@
+package Managers;
+
+import Tasks.Task;
+
 import java.util.List;
 
 public interface HistoryManager {       //Интерфейс менеджера истории просмотров

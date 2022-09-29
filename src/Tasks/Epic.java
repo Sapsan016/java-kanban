@@ -1,7 +1,9 @@
+package Tasks;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-class Epic extends Task{   //Наследует от Task
+public class Epic extends Task {   //Наследует от Tasks.Task
 
 private final ArrayList<Integer> subtasksIds; //Список id подзадач
 
@@ -25,10 +27,6 @@ private final ArrayList<Integer> subtasksIds; //Список id подзадач
     @Override
     public Type getType(){
         return Type.EPIC;
-    }
-
-   public int getDuration(){
-        return duration;
     }
 
     @Override

@@ -1,3 +1,6 @@
+package Managers;
+import Tasks.*;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
@@ -7,9 +10,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     protected int id = 0;                                        //Начальный id
 
-    protected HashMap<Integer, Task> tasks = new HashMap<>();            //Мапа для задач
-    protected HashMap<Integer, Epic> epics = new HashMap<>();            //Мапа для эпиков
-    protected HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
+    public HashMap<Integer, Task> tasks = new HashMap<>();            //Мапа для задач
+    public HashMap<Integer, Epic> epics = new HashMap<>();            //Мапа для эпиков
+    public HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
     protected HistoryManager history = Managers.getDefaultHistory();   // Получаем менеджер истории
 
     StartTimeComparator comparator = new StartTimeComparator();   //Компаратор для сравнения starTime
