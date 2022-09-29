@@ -1,4 +1,5 @@
 package Tests;
+
 import Managers.*;
 import Tasks.*;
 
@@ -28,36 +29,6 @@ class FileBackedTasksManagerTest extends InMemoryTaskManagerTest {
     @Test
     void shouldIncreaseIdToOne() {                                  //Id должен увеличиться до 1
         super.shouldIncreaseIdToOne();
-    }
-
-    @Test
-    void shouldAddTask() {                                          //Должна быть добавлена задача
-        super.shouldAddTask();
-    }
-
-    @Test
-    void shouldAddEpic() {                                          //Должен быть добавлен эпик
-        super.shouldAddEpic();
-    }
-
-    @Test
-    void shouldAddSubtask() {                                     //Должна быть добавлена подзадача
-        super.shouldAddSubtask();
-    }
-
-    @Test
-    void shouldReturnAndRemoveTasks() {                            //Должны возвращаться и удаляться задачи
-        super.shouldReturnAndRemoveTasks();
-    }
-
-    @Test
-    void shouldReturnAndRemoveEpics() {                                //Должны возвращаться и удаляться эпики
-        super.shouldReturnAndRemoveEpics();
-    }
-
-    @Test
-    void shouldReturnAndRemoveSubtasks() {                             //Должны возвращаться и удаляться подзадачи
-        super.shouldReturnAndRemoveSubtasks();
     }
 
     @Test

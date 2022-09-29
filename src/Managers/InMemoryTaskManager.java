@@ -15,7 +15,7 @@ public class InMemoryTaskManager implements TaskManager {
     public HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
     protected HistoryManager history = Managers.getDefaultHistory();   // Получаем менеджер истории
 
-    StartTimeComparator comparator = new StartTimeComparator();   //Компаратор для сравнения starTime
+  //  StartTimeComparator comparator = new StartTimeComparator();   //Компаратор для сравнения starTime
 
     @Override
     public int getId() {                                       //Получаем новый уникальный id
@@ -23,8 +23,16 @@ public class InMemoryTaskManager implements TaskManager {
         return id;
     }
 
-    public TreeSet<Task> getPrioritizedTasks() {                 //Создаем сортированный список задач по времени начала
-        TreeSet<Task> startTimeSet = new TreeSet<>(comparator);
+    public TreeSet<Task> getPrioritizedTasks() {                //Создаем сортированный список задач по времени начала
+                                                                 //Переопределяем компаратор для сравнения времени начала
+        TreeSet<Task> startTimeSet = new TreeSet<> ((o1, o2) -> { //с использованием лямбды
+            if (o1.startTime.isAfter(o2.startTime)) {
+                return 1;
+            } else if (o1.startTime.isBefore(o2.startTime)) {
+                return -1;
+            } else
+                return 0;
+        });
 
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
             startTimeSet.add(entry.getValue());
@@ -73,7 +81,8 @@ public class InMemoryTaskManager implements TaskManager {
         return isValid;
     }
 
-    public boolean validateSubtasks(Subtask subtask) {   //Проверяем подзадачи и наличие пересечений по времени со всеми задачами кроме эпиков
+    public boolean validateSubtasks(Subtask subtask) {   //Проверяем подзадачи и наличие пересечений по времени
+                                                         // со всеми задачами кроме эпиков
         boolean isValid = true;
         TreeSet<Task> startTimeSet = getPrioritizedTasks();
         for (Task t : startTimeSet) {
@@ -262,8 +271,7 @@ public class InMemoryTaskManager implements TaskManager {
         int epicsId = newSubtask.getEpicId();
         changeEpicsStatus(epicsId);                             //Вызываем метод для обновления статуса эпика
 
-    }                          //Вызываем метод для обновления статуса эпика
-
+    }
 
     @Override
     public void changeEpicsStatus(int id) {
@@ -279,7 +287,7 @@ public class InMemoryTaskManager implements TaskManager {
 
             if (subtasks.get(subId).status.equals(curStatus)) {           //Сравниваем статус всех подзадач с первым,
                 epics.get(id).setStatus(curStatus);                       // если статусы одинаковы, присваиваем статус
-                // эпику
+                                                                          // эпику
             } else
                 epics.get(id).setStatus(Status.IN_PROGRESS);             //Во всех остальных случаях статус IN_PROGRESS
         }
@@ -288,17 +296,5 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public List<Task> getHistory() {                                        //Просмотр истории
         return history.getHistory();
-    }
-}
-
-class StartTimeComparator implements Comparator<Task> {   //Переопределяем компаратор для сравнения времени начала
-    @Override
-    public int compare(Task o1, Task o2) {
-        if (o1.startTime.isAfter(o2.startTime)) {
-            return 1;
-        } else if (o1.startTime.isBefore(o2.startTime)) {
-            return -1;
-        } else
-            return 0;
     }
 }
