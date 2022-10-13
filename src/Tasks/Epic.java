@@ -1,7 +1,10 @@
 package Tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import static Tasks.Type.EPIC;
 
 public class Epic extends Task {   //Наследует от Tasks.Task
 
@@ -26,7 +29,7 @@ private final ArrayList<Integer> subtasksIds; //Список id подзадач
     }
     @Override
     public Type getType(){
-        return Type.EPIC;
+        return EPIC;
     }
 
     @Override
@@ -54,7 +57,8 @@ private final ArrayList<Integer> subtasksIds; //Список id подзадач
 
     @Override
     public String toString() {
-        return id + "," + Type.EPIC + "," + name + "," + status + "," + description + "," + duration + "," +
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm"); //Шаблон для форматирования времени начала
+        return id + "," + EPIC + "," + name + "," + status + "," + description + "," + duration + "," +
                 startTime.format(formatter) + "," +
                  subtasksIds.toString().replace("[", "").replace("]",
                          "").replaceAll("\\s+","");

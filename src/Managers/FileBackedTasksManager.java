@@ -5,7 +5,6 @@ import Tasks.Status;
 import Tasks.Task;
 import Tasks.Type;
 import Tasks.Subtask;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -81,7 +80,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         }
     }
 
-    public void fromString(String value) {                          //Восстанавливаем задачи из строки
+    public void fromString(String value) throws IOException, InterruptedException {  //Восстанавливаем задачи из строки
         int recoveredId = 0;                                        //Создаем переменную для воссстановлению последнего Id
 
         String[] lines = value.split("\n");                   //Делим строку по линиям
@@ -95,7 +94,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             if(id > recoveredId){
                 recoveredId = id;                                      //находим последний сохраненный Id
             }
-            this.id = recoveredId;                                     //Присваиваем значение полю с Id для генерации новых Id начиная с восстановленного
+            this.id = recoveredId;                                     //Присваиваем значение полю с Id для генерации
+                                                                       // новых Id начиная с восстановленного
             Type type = Type.valueOf(parts[1]);                        //Сохраняем тип задачи из второй колонки
             String name = parts[2];                                    //Сохраняем имя задачи из третей колонки
             Status status = Status.valueOf(parts[3]);                  //Сохраняем статус задачи из четвертой колонки

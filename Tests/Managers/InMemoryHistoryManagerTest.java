@@ -1,8 +1,8 @@
-package Tests;
+package Managers;
+
 import Tasks.*;
 import Managers.*;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,4 +43,5 @@ class InMemoryHistoryManagerTest {
         history = testHistoryManager.getHistory();    //Получаем список истории
         assertEquals(0, history.size(), "History size don`t match"); //Проверяем размер
     }
+
 }

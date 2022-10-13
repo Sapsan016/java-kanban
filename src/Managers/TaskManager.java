@@ -5,7 +5,7 @@ import Tasks.Task;
 import Tasks.Subtask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 public interface TaskManager {     //Интерфейс менеджера задач
@@ -18,11 +18,11 @@ public interface TaskManager {     //Интерфейс менеджера за�
 
     int createSubtask(Subtask subtask);
 
-    HashMap<Integer, Task> getAllTasks();
+    List<Task> getAllTasks();
 
-    HashMap<Integer, Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
-    HashMap<Integer, Subtask> getAllSubtasks();
+    List<Subtask> getAllSubtasks();
 
     void removeAllTasks();
 
@@ -42,7 +42,7 @@ public interface TaskManager {     //Интерфейс менеджера за�
 
     void removeSubtaskById(int id);
 
-    ArrayList<Object> getEpicsSubtasks(int id);
+    ArrayList<Subtask> getEpicsSubtasks(int id);
 
     void updateTask(Task newTask);
 

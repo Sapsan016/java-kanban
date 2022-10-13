@@ -15,7 +15,6 @@ public class InMemoryTaskManager implements TaskManager {
     public HashMap<Integer, Subtask> subtasks = new HashMap<>();      //Мапа для подзадач
     protected HistoryManager history = Managers.getDefaultHistory();   // Получаем менеджер истории
 
-  //  StartTimeComparator comparator = new StartTimeComparator();   //Компаратор для сравнения starTime
 
     @Override
     public int getId() {                                       //Получаем новый уникальный id
@@ -74,7 +73,7 @@ public class InMemoryTaskManager implements TaskManager {
         boolean isValid = true;
         TreeSet<Task> startTimeSet = getPrioritizedTasks();
         for (Task t : startTimeSet) {
-            if (task.getEndTime().isBefore(t.getEndTime())) {
+            if (task.getStartTime().isBefore(t.getEndTime())) {
                 return false;
             }
         }
@@ -87,7 +86,7 @@ public class InMemoryTaskManager implements TaskManager {
         TreeSet<Task> startTimeSet = getPrioritizedTasks();
         for (Task t : startTimeSet) {
             if (!t.getType().equals(Type.EPIC)) {
-                if (subtask.getEndTime().isBefore(t.getEndTime())) {
+                if (subtask.getStartTime().isBefore(t.getEndTime())) {
                     return false;
                 }
             }
@@ -146,18 +145,18 @@ public class InMemoryTaskManager implements TaskManager {
 
 
     @Override
-    public HashMap<Integer, Task> getAllTasks() {                               // Получаем все задачи
-        return tasks;
+    public List<Task> getAllTasks() {                               // Получаем все задачи
+        return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public HashMap<Integer, Epic> getAllEpics() {                               //Получаем все эпики
-        return epics;
+    public List<Epic> getAllEpics() {                               //Получаем все эпики
+        return new ArrayList<>(epics.values());
     }
 
     @Override
-    public HashMap<Integer, Subtask> getAllSubtasks() {                             //Получаем все подзадачи
-        return subtasks;
+    public List<Subtask> getAllSubtasks() {                             //Получаем все подзадачи
+        return new ArrayList<>(subtasks.values());
     }
 
     @Override
@@ -224,10 +223,10 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Object> getEpicsSubtasks(int id) {           // Получение подзадач эпика
+    public ArrayList<Subtask> getEpicsSubtasks(int id) {           // Получение подзадач эпика
         if (epics.containsKey(id)) {                              //Проверка переданного id на соотвествие id эпика
             Epic epic = epics.get(id);
-            ArrayList<Object> subtasksList = new ArrayList<>();   //Список для подзадач
+            ArrayList<Subtask> subtasksList = new ArrayList<>();   //Список для подзадач
             for (Integer subId : epic.getSubtasksIds()) {
                 subtasksList.add(subtasks.get(subId));            //Добавляем подзадачи по id
             }

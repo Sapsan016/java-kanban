@@ -1,4 +1,5 @@
-package Tests;
+package Managers;
+
 import Tasks.*;
 import Managers.*;
 import org.junit.jupiter.api.Assertions;
@@ -19,13 +20,13 @@ class InMemoryTaskManagerTest {
     protected Task testTask2 = new Task("Test NewTask2", "Test NewTask2 description", Status.NEW, 0,
             10, LocalDateTime.now());
     protected Task testTask3 = new Task("Test NewTask3", "Test NewTask3 description", Status.NEW, 0,
-            10, LocalDateTime.now().plusMinutes(160));
+            10, LocalDateTime.now().plusMinutes(200));
 
     protected Epic testEpic1 = new Epic("Test NewEpic1", "Test NewEpic1 description", Status.NEW, 0,
             60, LocalDateTime.now());
 
     protected Epic testEpic2 = new Epic("Test NewEpic2", "Test NewEpic2 description", Status.NEW, 0,
-            30, LocalDateTime.now().plusMinutes(30));
+            30, LocalDateTime.now().plusMinutes(70));
 
     protected Subtask testSubtask1 = new Subtask("Test NewSubtask1", "Test dNewSubtask1 description",
             Status.NEW, 0, 1, 25, LocalDateTime.now().plusMinutes(5));

@@ -1,16 +1,16 @@
-package Tests;
+package Managers;
 
 import Tasks.*;
-import Tasks.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AddAndRemoveTasksTest extends InMemoryTaskManagerTest{
+
+public class AddAndRemoveTasksTest extends InMemoryTaskManagerTest {
     @Test
     void shouldAddTask() {                                                         //Должна быть добавлена задача
         testManager.createTask(testTask1);
@@ -39,16 +39,18 @@ public class AddAndRemoveTasksTest extends InMemoryTaskManagerTest{
     void shouldReturnAndRemoveTasks() {                            //Должны возвращаться и удаляться задачи
         testManager.createTask(testTask1);
         testManager.createTask(testTask3);
-        HashMap<Integer, Task> savedTasks = testManager.getAllTasks();
+        List<Task> savedTasks = testManager.getAllTasks();
         assertNotNull(savedTasks, "Tasks don`t return.");
         assertEquals(2, savedTasks.size(), "Tasks amount is wrong."); //Проверяем количство
-        Assertions.assertEquals(testTask1, savedTasks.get(testTask1.getId()),                      //Проверяем соответствие
+        Assertions.assertEquals(testTask1, savedTasks.get(0),                      //Проверяем соответствие
                 "Tasks don`t match.");
         testManager.removeTaskById(testTask1.getId());                                 //Удаляем задачу 1
+        savedTasks = testManager.getAllTasks();
         assertEquals(1, savedTasks.size(), "Tasks amount is wrong."); //Проверяем количство
-        Assertions.assertEquals(testTask3, savedTasks.get(testTask3.getId()),                      //Проверяем соответствие
+        Assertions.assertEquals(testTask3, savedTasks.get(0),                      //Проверяем соответствие
                 "Tasks don`t match.");
         testManager.removeAllTasks();
+        savedTasks = testManager.getAllTasks();
         assertEquals(0, savedTasks.size(),                             //Проверяем что все задачи удалены
                 "Tasks.Task`s map is NOT empty.");
     }
@@ -57,16 +59,18 @@ public class AddAndRemoveTasksTest extends InMemoryTaskManagerTest{
     void shouldReturnAndRemoveEpics() {                                //Должны возвращаться и удаляться эпики
         testManager.createEpic(testEpic1);
         testManager.createEpic(testEpic2);
-        HashMap<Integer, Epic> savedEpics = testManager.getAllEpics();
+        List<Epic> savedEpics = testManager.getAllEpics();
         assertNotNull(savedEpics, "Epics don`t return.");
         assertEquals(2, savedEpics.size(), "Epics amount is wrong."); //Проверяем количство
-        Assertions.assertEquals(testEpic1, savedEpics.get(testEpic1.getId()),                    //Проверяем соответствие
+        Assertions.assertEquals(testEpic1, savedEpics.get(0),                    //Проверяем соответствие
                 "Epics don`t match.");
         testManager.removeEpicById(testEpic1.getId());                                //Удаляем эпик 1
+        savedEpics = testManager.getAllEpics();
         assertEquals(1, savedEpics.size(), "Epics amount is wrong."); //Проверяем количство
-        Assertions.assertEquals(testEpic2, savedEpics.get(testEpic2.getId()),                    //Проверяем соответствие
+        Assertions.assertEquals(testEpic2, savedEpics.get(0),                    //Проверяем соответствие
                 "Epics don`t match.");
         testManager.removeAllEpics();
+        savedEpics = testManager.getAllEpics();
         assertEquals(0, savedEpics.size(),                                   //Проверяем что эпики удалены
                 "Epic`s map is NOT empty.");
     }
@@ -76,16 +80,18 @@ public class AddAndRemoveTasksTest extends InMemoryTaskManagerTest{
         testManager.createEpic(testEpic1);
         testManager.createSubtask(testSubtask1);
         testManager.createSubtask(testSubtask2);
-        HashMap<Integer, Subtask> savedSubtasks = testManager.getAllSubtasks();
+        List<Subtask> savedSubtasks = testManager.getAllSubtasks();
         assertNotNull(savedSubtasks, "Subtasks don`t return.");
         assertEquals(2, savedSubtasks.size(), "Subtasks amount is wrong."); //Проверяем количство
-        Assertions.assertEquals(testSubtask1, savedSubtasks.get(testSubtask1.getId()),
+        Assertions.assertEquals(testSubtask1, savedSubtasks.get(0),
                 "Epics don`t match.");                                             //Проверяем соответствие
         testManager.removeSubtaskById(testSubtask2.getId());                               //Удаляем подзадачу 1
+        savedSubtasks = testManager.getAllSubtasks();
         assertEquals(1, savedSubtasks.size(), "Subtasks amount is wrong."); //Проверяем количство
-        Assertions.assertEquals(testSubtask1, savedSubtasks.get(testSubtask1.getId()),
+        Assertions.assertEquals(testSubtask1, savedSubtasks.get(0),
                 "Epics don`t match.");                                             //Проверяем соответствие
         testManager.removeAllSubtasks();
+        savedSubtasks = testManager.getAllSubtasks();
         assertEquals(0, savedSubtasks.size(),                                //Проверяем что задачи удалены
                 "Tasks.Subtask`s map is NOT empty.");
     }

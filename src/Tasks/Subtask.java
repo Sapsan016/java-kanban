@@ -5,6 +5,9 @@ import Tasks.Task;
 import Tasks.Type;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import static Tasks.Type.SUBTASK;
 
 public class Subtask extends Task {
 
@@ -17,7 +20,7 @@ public class Subtask extends Task {
     }
     @Override
     public Type getType(){
-        return Type.SUBTASK;
+        return SUBTASK;
     }
 
     public int getEpicId(){                                     //Возвращаем id эпика
@@ -26,7 +29,8 @@ public class Subtask extends Task {
 
     @Override
     public String toString() {
-        return id + "," + Type.SUBTASK + "," + name + "," + status + "," + description + "," + duration + "," +
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm"); //Шаблон для форматирования времени начала
+        return id + "," + SUBTASK + "," + name + "," + status + "," + description + "," + duration + "," +
                 startTime.format(formatter) + "," + epicId;
     }
 }

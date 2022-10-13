@@ -5,7 +5,7 @@ import Tasks.Task;
 import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final CustomLinkedList<Task> customHistoryList = new CustomLinkedList<>(); //Список просмотренных задач
+    private final CustomLinkedList<Task> customHistoryList = new CustomLinkedList<Task>(); //Список просмотренных задач
     private final Map<Integer, Node<Task>> historyMap = new HashMap<>();
 
     @Override
@@ -51,7 +51,7 @@ class CustomLinkedList<T> {                          //Создаем двусв
     public Node<Task> linkLast(Task task) {                           //Добавляем элемент в конец списка
 
         Node<Task> oldTail = tail;                                    //Запоминаем "хвост"
-        Node<Task> newNode = new Node<>(oldTail, task, null);   // Создаем новый последний узел
+        Node<Task> newNode = new Node<Task>(oldTail, task, null);   // Создаем новый последний узел
         tail = newNode;                                               //Присваиваем новому узлу значение "хвост"
         if (oldTail == null)                                         //Если запомненый "хвост" пустой то,
             head = newNode;                                          // присваиваем новому узлу значение "голова"

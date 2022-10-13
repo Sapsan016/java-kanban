@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import static Tasks.Type.TASK;
+
 public class Task {
     protected String name;
     protected String description;
@@ -16,7 +18,7 @@ public class Task {
 
     protected LocalDateTime endTime;
 
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm"); //Шаблон для форматирования времени начала
+    //  protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm"); //Шаблон для форматирования времени начала
 
     public Task(String name, String description, Status status, int id, int duration, LocalDateTime startTime) {
         this.name = name;
@@ -28,7 +30,7 @@ public class Task {
     }
 
     public Type getType(){
-        return Type.TASK;
+        return TASK;
     }
 
 
@@ -37,7 +39,7 @@ public class Task {
     }
 
     public void setEndTime() {
-        this.endTime = startTime.plusMinutes(duration);;
+        this.endTime = startTime.plusMinutes(duration);
     }
 
     public LocalDateTime getStartTime(){
@@ -58,7 +60,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + Type.TASK + "," + name + "," + status + "," + description + "," + duration + ","
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm"); //Шаблон для форматирования времени начала
+        return id + "," + TASK + "," + name + "," + status + "," + description + "," + duration + ","
                 + startTime.format(formatter);
     }
 
@@ -76,7 +79,8 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id , Type.TASK,name, status ,description ,duration ,startTime.format(formatter));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm"); //Шаблон для форматирования времени начала
+        return Objects.hash(id , TASK,name, status ,description ,duration ,startTime.format(formatter));
     }
 
     public void setStatus(Status newStatus) {
