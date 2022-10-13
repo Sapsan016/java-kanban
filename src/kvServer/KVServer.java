@@ -1,4 +1,4 @@
-package KVServer;
+package kvServer;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -7,7 +7,7 @@ import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 
-import Managers.Managers;
+import managers.Managers;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;

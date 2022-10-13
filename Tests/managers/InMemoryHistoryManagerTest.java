@@ -1,7 +1,6 @@
-package Managers;
+package managers;
 
-import Tasks.*;
-import Managers.*;
+import tasks.*;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;

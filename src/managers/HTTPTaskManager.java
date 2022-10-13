@@ -1,7 +1,7 @@
-package Managers;
+package managers;
 
-import KVServer.KVTaskClient;
-import Tasks.*;
+import kvServer.KVTaskClient;
+import tasks.*;
 import com.google.gson.Gson;
 
 import com.google.gson.reflect.TypeToken;

@@ -1,10 +1,10 @@
-package Managers;
+package managers;
 
-import Tasks.Epic;
-import Tasks.Status;
-import Tasks.Task;
-import Tasks.Type;
-import Tasks.Subtask;
+import tasks.Epic;
+import tasks.Status;
+import tasks.Task;
+import tasks.Type;
+import tasks.Subtask;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

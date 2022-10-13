@@ -1,10 +1,10 @@
-package Tasks;
+package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static Tasks.Type.EPIC;
+import static tasks.Type.EPIC;
 
 public class Epic extends Task {   //Наследует от Tasks.Task
 

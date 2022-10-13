@@ -1,11 +1,11 @@
-package HTTPServer;
+package httpServer;
 
-import Managers.Managers;
-import Managers.TaskManager;
-import Tasks.Epic;
+import managers.Managers;
+import managers.TaskManager;
+import tasks.Epic;
 
-import Tasks.Subtask;
-import Tasks.Task;
+import tasks.Subtask;
+import tasks.Task;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

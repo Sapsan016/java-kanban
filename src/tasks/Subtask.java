@@ -1,13 +1,9 @@
-package Tasks;
-
-import Tasks.Status;
-import Tasks.Task;
-import Tasks.Type;
+package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static Tasks.Type.SUBTASK;
+import static tasks.Type.SUBTASK;
 
 public class Subtask extends Task {
 

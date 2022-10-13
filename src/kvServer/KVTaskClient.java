@@ -1,6 +1,6 @@
-package KVServer;
+package kvServer;
 
-import Managers.Managers;
+import managers.Managers;
 import com.google.gson.Gson;
 
 import java.io.IOException;

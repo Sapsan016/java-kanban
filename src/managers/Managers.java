@@ -1,6 +1,6 @@
-package Managers;
-import Adapter.LocalDateTimeAdapter;
-import KVServer.KVServer;
+package managers;
+import adapter.LocalDateTimeAdapter;
+import kvServer.KVServer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;

@@ -1,10 +1,10 @@
-package Tasks;
+package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-import static Tasks.Type.TASK;
+import static tasks.Type.TASK;
 
 public class Task {
     protected String name;
